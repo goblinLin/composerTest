@@ -13,7 +13,7 @@ local scene = composer.newScene( )
 --宣告各種變數
 --=======================================================================================
 local img_game
-
+local bgMusic = audio.loadStream( "bg_game.mp3")
 local lb_game
 --=======================================================================================
 --定義各種函式
@@ -49,10 +49,11 @@ function  scene:show( event)
 
     if( "will" == phase ) then
         --畫面即將要推上螢幕時要執行的程式碼寫在這邊
+        audio.play( bgMusic)
     elseif ( "did" == phase ) then
         --把畫面已經被推上螢幕後要執行的程式碼寫在這邊
         --可能是移除之前的場景，播放音效，開始計時，播放各種動畫
-
+        
     end
 end
 
@@ -67,6 +68,8 @@ function scene:hide( event )
     if ( "will" == phase ) then
         --畫面即將移開螢幕時，要執行的程式碼
         --這邊需要停止音樂，釋放音樂記憶體，有timer的計時器也可以在此停止
+        audio.dispose( bgMusic )
+        bgMusic = nil
     elseif ( "did" == phase ) then
         --畫面已經移開螢幕時，要執行的程式碼
     end

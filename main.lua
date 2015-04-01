@@ -3,7 +3,7 @@
 -- main.lua
 -- 本範例示範如何使用Composer架構來製作頁面切換的效果	
 -- Author: Zack Lin
---
+-- Time: 2015/5/1
 -----------------------------------------------------------------------------------------
 
 --=======================================================================================
@@ -25,7 +25,6 @@ _SCREEN.CENTER = {
 }
 
 local str_game = "神魔之塔 V8.0"
-
 local img_loading
 
 local onClick
@@ -50,6 +49,7 @@ onClick =  function ( event )
 		img_loading = nil
 		--透過設定Variable的機制將變數傳到其他Scene
 		composer.setVariable( "game", str_game )
+		--將舞台轉移到scene1場景
 		composer.gotoScene( "scene1" )
 		Runtime:removeEventListener( "touch", onClick )
 	end
