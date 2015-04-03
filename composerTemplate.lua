@@ -55,3 +55,4 @@ scene:addEventListener( "show", scene )
 scene:addEventListener( "hide", scene )
 scene:addEventListener( "destory", scene )
 
+return scene

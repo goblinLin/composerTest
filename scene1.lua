@@ -30,14 +30,17 @@ function scene:create(event)
     local sceneGroup = self.view
 
     --接下來把會出現在畫面的東西，加進sceneGroup裡面，這個非常重要
+    
     img_game = display.newImageRect( "game.jpg" , _SCREEN.WIDTH, _SCREEN.HEIGHT )
     img_game.x = _SCREEN.CENTER.X
     img_game.y = _SCREEN.CENTER.Y
     sceneGroup:insert( img_game )
 
     local tmp = composer.getVariable( "game" )
+    composer.getVariable( "loading" ):removeSelf( )
     lb_game = display.newText( tmp , _SCREEN.CENTER.X , _SCREEN.HEIGHT - 20 ,  system.nativeFont , 24 )
     lb_game:setFillColor( 1 , 1 , 1 )
+
 end
 
 
@@ -68,6 +71,7 @@ function scene:hide( event )
     if ( "will" == phase ) then
         --畫面即將移開螢幕時，要執行的程式碼
         --這邊需要停止音樂，釋放音樂記憶體，有timer的計時器也可以在此停止
+        audio.stop(bgMusic)
         audio.dispose( bgMusic )
         bgMusic = nil
     elseif ( "did" == phase ) then

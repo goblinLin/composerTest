@@ -45,15 +45,16 @@ end
 --=======================================================================================
 onClick =  function ( event )
 	if("ended" == event.phase) then
-		img_loading:removeSelf( )
-		img_loading = nil
+		--img_loading:removeSelf( )
+		--img_loading = nil
 		--透過設定Variable的機制將變數傳到其他Scene
 		composer.setVariable( "game", str_game )
+		composer.setVariable( "loading", img_loading )
 		--將舞台轉移到scene1場景
-		composer.gotoScene( "scene1" )
+		local options = { effect = "fade" , time = 400}
+		composer.gotoScene( "scene1" , options)
 		Runtime:removeEventListener( "touch", onClick )
 	end
-	
 end
 --=======================================================================================
 --呼叫主函式
