@@ -11,7 +11,7 @@
 --=======================================================================================
 display.setStatusBar( display.HiddenStatusBar )
 --要使用Composer架構必須要先用require指令來匯入Lib
-local composer = require( "composer" )
+composer = require( "composer" )
 --=======================================================================================
 --宣告各種變數
 --=======================================================================================
@@ -27,22 +27,28 @@ _SCREEN.CENTER = {
 local str_game = "神魔之塔 V8.0"
 local img_loading
 
+local init
 local onClick
 --=======================================================================================
 --宣告與定義main()函式
 --=======================================================================================
 local main = function (  )
-	img_loading = display.newImageRect( "loading.jpg", _SCREEN.WIDTH, _SCREEN.HEIGHT )
-	img_loading.x = _SCREEN.CENTER.X
-	img_loading.y = _SCREEN.CENTER.Y
-
-
-	Runtime:addEventListener( "touch", onClick )
+	init()
 end
 
 --=======================================================================================
 --定義其他函式
 --=======================================================================================
+init = function (  )
+	local stage = display.getCurrentStage( )
+	img_loading = display.newImageRect( "loading.jpg", _SCREEN.WIDTH, _SCREEN.HEIGHT )
+	img_loading.x = _SCREEN.CENTER.X
+	img_loading.y = _SCREEN.CENTER.Y
+	--composer.stage:insert(img_loading)
+	stage:insert(composer.stage) --加上這行才會有換場特效
+	Runtime:addEventListener( "touch", onClick )
+end
+
 onClick =  function ( event )
 	if("ended" == event.phase) then
 		--img_loading:removeSelf( )
